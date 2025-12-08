@@ -5,17 +5,22 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+
+    // 메서드 두개가 다 사용할 수 있어야 하기 때문에 전역변수로 빠짐
+    static List<Article> articles = new ArrayList<>();
+
     public static void main(String[] args) {
+
 
         Scanner sc = new Scanner(System.in);
 
         System.out.println("==프로그램 시작==");
 
-        int lastArticleId = 0;
 
-        List<Article> articles = new ArrayList<>();
+        makeTestData();
 
-//        makeTestData();
+        int lastArticleId = 3;
+
 
         while (true) {
             System.out.print("명령어 ) ");
@@ -51,9 +56,9 @@ public class Main {
                     System.out.println("   번호  /       날짜       /       제목     /   내용  ");
                     for (int i = articles.size() - 1; i >= 0; i--) {
                         Article article = articles.get(i);
-                        if(Util.getNowStr().split(" ")[0].equals(article.getRegDate().split(" ")[0])) {
+                        if (Util.getNowStr().split(" ")[0].equals(article.getRegDate().split(" ")[0])) {
                             System.out.printf("   %d     /    %s          /    %s     /     %s   \n", article.getId(), article.getRegDate().split(" ")[1], article.getTitle(), article.getBody());
-                        }else {
+                        } else {
                             System.out.printf("   %d     /    %s          /    %s     /     %s   \n", article.getId(), article.getRegDate().split(" ")[0], article.getTitle(), article.getBody());
                         }
 
@@ -140,8 +145,18 @@ public class Main {
         }
         System.out.println("==프로그램 끝==");
         sc.close();
+
+    }
+
+    /** 테스트 데이터 생성 **/
+    private static void makeTestData() {
+        System.out.println("테스트 데이터 만들기 실행 됨");
+        articles.add(new Article(1, Util.getNowStr(), Util.getNowStr(), "테스트 제목", "테스트 제목"));
+        articles.add(new Article(2, Util.getNowStr(), Util.getNowStr(), "테스트 제목", "테스트 제목"));
+        articles.add(new Article(3, Util.getNowStr(), Util.getNowStr(), "테스트 제목", "테스트 제목"));
     }
 }
+
 
 class Article {
     private int id;
@@ -197,6 +212,5 @@ class Article {
     public void setBody(String body) {
         this.body = body;
     }
-
 
 }
