@@ -15,7 +15,6 @@ public class App {
         articleController.makeTestData();
         memberController.makeUserData();
 
-        int lastArticleId = 3;
 
         while (true) {
             System.out.print("명령어 ) ");
@@ -37,19 +36,19 @@ public class App {
             }
 
             else if (cmd.startsWith("article list")) {
-                articleController.viewList();
+                articleController.viewList(cmd);
             }
 
             else if (cmd.startsWith("article detail")) {
-                articleController.viewDetail();
+                articleController.viewDetail(cmd);
             }
 
             else if (cmd.startsWith("article delete")) {
-                articleController.doDelete();
+                articleController.doDelete(cmd);
             }
 
             else if (cmd.startsWith("article modify")) {
-                articleController.doModify();
+                articleController.doModify(cmd);
             }
 
             else {

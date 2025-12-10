@@ -33,7 +33,7 @@ public class articleController {
         lastArticleId++;
     }
 
-    public void viewList() {
+    public void viewList(String cmd) {
         System.out.println("==게시글 목록==");
 
         if (articles.size() == 0) {
@@ -70,7 +70,7 @@ public class articleController {
 
     }
 
-    public void viewDetail() {
+    public void viewDetail(String cmd) {
         System.out.println("== 게시글 상세 ==");
 
         int id = Integer.parseInt(cmd.split(" ")[2]);
@@ -88,7 +88,7 @@ public class articleController {
         }
     }
 
-    public void doDelete() {
+    public void doDelete(String cmd) {
         System.out.println("== 게시글 삭제 ==");
         int id = Integer.parseInt(cmd.split(" ")[2]);
 
@@ -102,7 +102,7 @@ public class articleController {
         }
     }
 
-    public void doModify() {
+    public void doModify(String cmd) {
         System.out.println("== 게시글 수정 ==");
         int id = Integer.parseInt(cmd.split(" ")[2]);
 
