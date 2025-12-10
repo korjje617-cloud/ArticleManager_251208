@@ -135,6 +135,12 @@ public class ArticleController extends Controller {
             System.out.println("해당 게시글은 없습니다");
             return;
         }
+
+        if (foundArticle.getMemberId() != loginedMember.getId()) {
+            System.out.println("권한없음");
+            return;
+        }
+
         articles.remove(foundArticle);
         System.out.println(id + "번 게시글이 삭제되었습니다");
     }
@@ -150,6 +156,12 @@ public class ArticleController extends Controller {
             System.out.println("해당 게시글은 없습니다");
             return;
         }
+
+        if (foundArticle.getMemberId() != loginedMember.getId()) {
+            System.out.println("권한없음");
+            return;
+        }
+
         System.out.println("기존 title : " + foundArticle.getTitle());
         System.out.println("기존 body : " + foundArticle.getBody());
         System.out.print("새 제목 : ");
