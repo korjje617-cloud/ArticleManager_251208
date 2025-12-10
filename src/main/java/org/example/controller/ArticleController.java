@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class ArticleController extends Controller {
     private Scanner sc;
-    private  List<Article> articles;
+    private List<Article> articles;
     private String cmd;
 
     private int lastArticleId = 3;
