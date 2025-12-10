@@ -1,4 +1,7 @@
-package org.example;
+package org.example.controller;
+
+import org.example.dto.Member;
+import org.example.util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,51 +40,55 @@ public class MemberController extends Controller {
         }
     }
 
-    private boolean isLogined() {
+    private boolean isLogined(){
         return loginedMember != null;
     }
 
-
     private void doLogout() {
-        System.out.println("== 로그아웃 ==");
-        if (!isLogined()) {
-            System.out.println("이미 로그아웃 상태");
+        if(!isLogined()) {
+            System.out.println("이미 로그아웃 중");
             return;
         }
 
         loginedMember = null;
-        System.out.println("로그아웃 성공");
 
+        System.out.println("로그아웃 됨");
     }
 
-    private void doLogin(){
-        System.out.println("== 로그인 ==");
-        if (isLogined()) {
-            System.out.println("이미 로그인 상태");
+    private void doLogin() {
+        if(isLogined()) {
+            System.out.println("이미 로그인 중");
             return;
         }
+        System.out.println("==로그인==");
 
         System.out.print("로그인 아이디 : ");
         String loginId = sc.nextLine().trim();
-
         System.out.print("비밀번호 : ");
         String password = sc.nextLine().trim();
 
+        // 얘 내 회원인가??? -> 사용자가 방금 입력한 로그인 아이디와 일치하는 회원이 나한테 있나?
+
         Member member = getMemberByLoginId(loginId);
 
+        //  있어 없어?
         if (member == null) {
-            System.out.println("회원 없음");
+            System.out.println("일치하는 회원 없음");
             return;
         }
 
-        if(member.getPassword().equals(password) == false){
-            System.out.println("비밀번호 틀림");
+        // 내가 알고있는 이 사람의 비번이랑 지금 사용자가 입력한거랑 같나?
+        if (member.getPassword().equals(password) == false) {
+            System.out.println("비번 틀렸어");
+            return;
         }
 
-        loginedMember = member;
+        // 로그인 성공
+        loginedMember = member; // 해당 변수에 현재 로그인 한 회원의 정보 저장
 
-        System.out.println(loginedMember.getName() + " 로그인 성공");
+        System.out.println(loginedMember.getName() + "님, 로그인 성공!");
     }
+
 
     private void doJoin() {
         System.out.println("==회원 가입==");
