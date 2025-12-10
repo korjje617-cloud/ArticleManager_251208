@@ -9,12 +9,13 @@ public class Member {
     private String regDate;
     private String updateDate;
 
-    public Member(int memid, String loginId, String password, String name, String regDate, String updateDate) {
+    public Member(int memid, String regDate, String updateDate, String loginId, String password, String name) {
         this.memid = memid;
         this.loginId = loginId;
         this.password = password;
         this.regDate = regDate;
         this.updateDate = updateDate;
+        this.name = name;
     }
 
     public String getName() {

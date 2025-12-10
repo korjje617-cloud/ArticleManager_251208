@@ -9,6 +9,7 @@ public class MemberController extends Controller {
     private Scanner sc;
     private List<Member> members;
     private String cmd;
+    private Member loginedMember = null;
 
     private int lastMemberId = 3;
 
@@ -24,10 +25,62 @@ public class MemberController extends Controller {
             case "join":
                 doJoin();
                 break;
+            case "login":
+                doLogin();
+                break;
+            case "logout":
+                doLogout();
+                break;
             default:
                 System.out.println("Invalid action method");
                 break;
         }
+    }
+
+    private boolean isLogined() {
+        return loginedMember != null;
+    }
+
+
+    private void doLogout() {
+        System.out.println("== 로그아웃 ==");
+        if (!isLogined()) {
+            System.out.println("이미 로그아웃 상태");
+            return;
+        }
+
+        loginedMember = null;
+        System.out.println("로그아웃 성공");
+
+    }
+
+    private void doLogin(){
+        System.out.println("== 로그인 ==");
+        if (isLogined()) {
+            System.out.println("이미 로그인 상태");
+            return;
+        }
+
+        System.out.print("로그인 아이디 : ");
+        String loginId = sc.nextLine().trim();
+
+        System.out.print("비밀번호 : ");
+        String password = sc.nextLine().trim();
+
+        Member member = getMemberByLoginId(loginId);
+
+        if (member == null) {
+            System.out.println("회원 없음");
+            return;
+        }
+
+        if(member.getPassword().equals(password) == false){
+            System.out.println("비밀번호 틀림");
+        }
+
+        loginedMember = member;
+
+        System.out.println(loginedMember.getName() + " 로그인 성공");
     }
 
     private void doJoin() {
@@ -65,6 +118,15 @@ public class MemberController extends Controller {
 
         System.out.println(id + "번 회원이 가입 되었습니다.");
         lastMemberId++;
+    }
+
+    private Member getMemberByLoginId(String loginId) {
+        for (Member member : members) {
+            if (member.getLoginId().equals(loginId)) {
+                return member;
+            }
+        }
+        return null;
     }
 
     private boolean isJoinableLoginId(String loginId) {
