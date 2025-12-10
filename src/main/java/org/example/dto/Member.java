@@ -1,7 +1,7 @@
 package org.example.dto;
 
 
-public class Member {
+public class Member extends Dto {
     private int memid;
     private String loginId;
     private String password;
@@ -59,10 +59,19 @@ public class Member {
     }
 
     public String getUpdateDate() {
+
         return updateDate;
     }
 
     public void setUpdateDate(String updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
